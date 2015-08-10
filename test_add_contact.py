@@ -16,22 +16,23 @@ class test_add_contact(unittest.TestCase):
         self.wd.implicitly_wait(60)
     
     def test_add_contact(self):
-        wd = self.wd
-        self.login(wd, username="admin", password="secret")
-        self.creat_new_contact(wd, Group(firstname="Petr", lastname="Petrov", nickname="Petya", title="tester", company="Yandex"))
-        self.logout(wd)
+        self.login(username="admin", password="secret")
+        self.creat_new_contact(Group(firstname="Petr", lastname="Petrov", nickname="Petya", title="tester", company="Yandex"))
+        self.logout()
 
     def test_add_empty_contact(self):
         wd = self.wd
-        self.login(wd, username="admin", password="secret")
-        self.creat_new_contact(wd, Group(firstname="", lastname="", nickname="", title="", company=""))
-        self.logout(wd)
+        self.login(username="admin", password="secret")
+        self.creat_new_contact(Group(firstname="", lastname="", nickname="", title="", company=""))
+        self.logout()
 
 
-    def logout(self, wd):
+    def logout(self):
+        wd = self.wd
         wd.find_element_by_link_text("Logout").click()
 
-    def creat_new_contact(self, wd, contact):
+    def creat_new_contact(self, contact):
+        wd = self.wd
         # init new contact creation
         wd.find_element_by_link_text("add new").click()
         # fill new contact form
@@ -53,8 +54,9 @@ class test_add_contact(unittest.TestCase):
         # submit new contact creation
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 
-    def login(self, wd, username, password):
-        self.open_home_page(wd)
+    def login(self, username, password):
+        wd = self.wd
+        self.open_home_page()
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
@@ -63,7 +65,8 @@ class test_add_contact(unittest.TestCase):
         wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_css_selector("input[type=\"submit\"]").click()
 
-    def open_home_page(self, wd):
+    def open_home_page(self):
+        wd = self.wd
         wd.get("http://localhost/addressbook/")
 
     def tearDown(self):
