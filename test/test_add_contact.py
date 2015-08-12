@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from contact import Group
+from model.contact import Group
 import pytest
-from application_contact import Application2
+from fixture.application_contact import Application2
 
 
 @pytest.fixture
@@ -10,7 +10,7 @@ def app(request):
     request.addfinalizer(fixture.destroy)
     return fixture
 
-    
+
 def test_add_contact(app):
     app.login(username="admin", password="secret")
     app.creat_new_contact(Group(firstname="Petr", lastname="Petrov", nickname="Petya", title="tester", company="Yandex"))
