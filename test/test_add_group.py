@@ -13,12 +13,12 @@ def app(request):
 
 def test_add_group(app):
     app.session.login(username="admin", password="secret")
-    app.creat_group(Group(name="adjl", header="dhjh", footer="hhjh"))
+    app.group.creat(Group(name="adjl", header="dhjh", footer="hhjh"))
     app.session.logout()
 
 
 def test_emp_add_group(app):
     app.session.login(username="admin", password="secret")
-    app.creat_group(Group(name="", header="", footer=""))
+    app.group.creat(Group(name="", header="", footer=""))
     app.session.logout()
 
