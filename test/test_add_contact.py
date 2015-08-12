@@ -12,14 +12,11 @@ def app(request):
 
 
 def test_add_contact(app):
-    app.login(username="admin", password="secret")
-    app.creat_new_contact(Group(firstname="Petr", lastname="Petrov", nickname="Petya", title="tester", company="Yandex"))
-    app.logout()
+    app.session.login(username="admin", password="secret")
+    app.contact.creat_new_contact(Group(firstname="Petr", lastname="Petrov", nickname="Petya", title="tester", company="Yandex"))
+    app.session.logout()
 
 def test_add_empty_contact(app):
-    app.login(username="admin", password="secret")
-    app.creat_new_contact(Group(firstname="", lastname="", nickname="", title="", company=""))
-    app.logout()
-
-def tearDown(self):
-    self.app.destroy()
+    app.session.login(username="admin", password="secret")
+    app.contact.creat_new_contact(Group(firstname="", lastname="", nickname="", title="", company=""))
+    app.session.logout()
