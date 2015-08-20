@@ -22,6 +22,7 @@ class ContactHelper:
         self.fill_contact_form(new_contact_date)
         #submit update
         wd.find_element_by_xpath(".//*[@id='content']/form[1]/input[1]").click()
+        wd.get("http://localhost/addressbook/")
 
     def fill_contact_form(self, contact):
         wd = self.app.wd
