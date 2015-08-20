@@ -53,4 +53,4 @@ class ContactHelper:
 
     def coutn(self):
         wd = self.app.wd
-        return len(wd.find_elements_by_name("selected[]").click())
+        return len(wd.find_elements_by_name("selected[]"))
