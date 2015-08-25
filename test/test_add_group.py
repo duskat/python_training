@@ -9,4 +9,7 @@ def test_add_group(app):
     assert len(odl_groups) + 1 == len(new_groups)
 
 def test_emp_add_group(app):
+    odl_groups = app.group.get_group_list()
     app.group.create(Group(name="", header="", footer=""))
+    new_groups = app.group.get_group_list()
+    assert len(odl_groups) + 1 == len(new_groups)
