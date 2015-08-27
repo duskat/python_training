@@ -58,8 +58,12 @@ class ContactHelper:
 
     def get_contact_list(self):
         wd = self.app.wd
+        wd.get("http://localhost/addressbook/")
         list_contact = []
         for element in wd.find_elements_by_name("entry"):
+            """cells = element.find_elements_by_tag_name("td")
+            text_firstname = cells[1].text
+            text_lastname = cells[2].text"""
             text_firstname = element.find_element_by_css_selector('tr[name="entry"] td:nth-of-type(2)').text
             text_lastname = element.find_element_by_css_selector('tr[name="entry"] td:nth-of-type(3)').text
             id = element.find_element_by_name("selected[]").get_attribute("id")
