@@ -1,4 +1,5 @@
 __author__ = 'Dzmitry'
+from model.contact import Group
 
 class ContactHelper:
 
@@ -54,3 +55,15 @@ class ContactHelper:
     def coutn(self):
         wd = self.app.wd
         return len(wd.find_elements_by_name("selected[]"))
+
+    def get_contact_list(self):
+        wd = self.app.wd
+        list_contact = []
+        for element in wd.find_elements_by_name("entry"):
+            text_firstname = element.find_element_by_css_selector('tr[name="entry"] td:nth-of-type(2)').text
+            text_lastname = element.find_element_by_css_selector('tr[name="entry"] td:nth-of-type(3)').text
+            id = element.find_element_by_name("selected[]").get_attribute("id")
+            list_contact.append(Group(firstname=text_firstname, lastname=text_lastname, id=id))
+        return list_contact
+
+
