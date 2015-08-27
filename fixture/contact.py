@@ -64,10 +64,10 @@ class ContactHelper:
             """cells = element.find_elements_by_tag_name("td")
             text_firstname = cells[1].text
             text_lastname = cells[2].text"""
-            text_firstname = element.find_element_by_css_selector('tr[name="entry"] td:nth-of-type(2)').text
-            text_lastname = element.find_element_by_css_selector('tr[name="entry"] td:nth-of-type(3)').text
             id = element.find_element_by_name("selected[]").get_attribute("id")
-            list_contact.append(Group(firstname=text_firstname, lastname=text_lastname, id=id))
+            text_firstname=element.find_element_by_css_selector('tr[name="entry"] td:nth-of-type(3)').text
+            text_lastname= element.find_element_by_css_selector('tr[name="entry"] td:nth-of-type(2)').text
+            list_contact.append(Group(id=id, lastname=text_lastname, firstname=text_firstname))
         return list_contact
 
 
