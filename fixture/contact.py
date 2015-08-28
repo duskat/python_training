@@ -13,6 +13,7 @@ class ContactHelper:
         self.fill_contact_form(contact)
         # submit new contact creation
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        self.list_contact_cache = None
 
     def modify_first_contact(self, new_contact_date):
         wd = self.app.wd
@@ -24,6 +25,7 @@ class ContactHelper:
         #submit update
         wd.find_element_by_xpath(".//*[@id='content']/form[1]/input[1]").click()
         wd.get("http://localhost/addressbook/")
+        self.list_contact_cache = None
 
     def fill_contact_form(self, contact):
         wd = self.app.wd
@@ -41,12 +43,13 @@ class ContactHelper:
             wd.find_element_by_name(fild_name).send_keys(text)
 
     def delet_first_contact(self):
-         wd = self.app.wd
-         self.select_first_contact()
-         #delet element
-         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
-         #confirm deletion
-         wd.switch_to_alert().accept()
+        wd = self.app.wd
+        self.select_first_contact()
+        #delet element
+        wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
+        #confirm deletion
+        wd.switch_to_alert().accept()
+        self.list_contact_cache = None
 
     def select_first_contact(self):
         wd = self.app.wd
@@ -54,20 +57,24 @@ class ContactHelper:
 
     def coutn(self):
         wd = self.app.wd
+        wd.get("http://localhost/addressbook/")
         return len(wd.find_elements_by_name("selected[]"))
 
+    list_contact_cache = None
+
     def get_contact_list(self):
-        wd = self.app.wd
-        wd.get("http://localhost/addressbook/")
-        list_contact = []
-        for element in wd.find_elements_by_name("entry"):
-            """cells = element.find_elements_by_tag_name("td")
-            text_firstname = cells[1].text
-            text_lastname = cells[2].text"""
-            id = element.find_element_by_name("selected[]").get_attribute("id")
-            text_firstname=element.find_element_by_css_selector('tr[name="entry"] td:nth-of-type(3)').text
-            text_lastname= element.find_element_by_css_selector('tr[name="entry"] td:nth-of-type(2)').text
-            list_contact.append(Group(id=id, lastname=text_lastname, firstname=text_firstname))
-        return list_contact
+        if self.list_contact_cache is None:
+            wd = self.app.wd
+            wd.get("http://localhost/addressbook/")
+            self.list_contact_cache = []
+            for element in wd.find_elements_by_name("entry"):
+                """cells = element.find_elements_by_tag_name("td")
+                text_firstname = cells[1].text
+                text_lastname = cells[2].text"""
+                id = element.find_element_by_name("selected[]").get_attribute("id")
+                text_firstname=element.find_element_by_css_selector('tr[name="entry"] td:nth-of-type(3)').text
+                text_lastname= element.find_element_by_css_selector('tr[name="entry"] td:nth-of-type(2)').text
+                self.list_contact_cache.append(Group(id=id, lastname=text_lastname, firstname=text_firstname))
+        return list(self.list_contact_cache)
 
 
