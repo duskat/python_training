@@ -1,16 +1,18 @@
 __author__ = 'Dzmitry'
 from model.contact import Group
+from random import randrange
 
 def test_modify_contact_firstname(app):
-    old_contacts = app.contact.get_contact_list()
     if app.contact.coutn() == 0:
         app.contact.create(Group(firstname="test"))
-    group = Group(firstname="Petya")
-    group.id = old_contacts[0].id
-    app.contact.modify_first_contact(Group(firstname="Petya"))
+    old_contacts = app.contact.get_contact_list()
+    index = randrange(len(old_contacts))
+    group = Group(firstname="John")
+    group.id = old_contacts[index].id
+    app.contact.modify_contact_by_index(index, group)
     new_contacts = app.contact.get_contact_list()
     assert len(old_contacts) == len(new_contacts)
-    old_contacts[0] = group
+    old_contacts[index] = group
     assert sorted(old_contacts, key=Group.id_or_max) == sorted(new_contacts, key=Group.id_or_max)
 
 

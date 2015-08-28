@@ -8,6 +8,7 @@ class ContactHelper:
 
     def create(self, contact):
         wd = self.app.wd
+        wd.get("http://localhost/addressbook/")
         # init new contact creation
         wd.find_element_by_link_text("add new").click()
         self.fill_contact_form(contact)
@@ -16,8 +17,11 @@ class ContactHelper:
         self.list_contact_cache = None
 
     def modify_first_contact(self, new_contact_date):
+        self.modify_contact_by_index(0)
+
+    def modify_contact_by_index(self, index, new_contact_date):
         wd = self.app.wd
-        self.select_first_contact()
+        self.select_contact_by_index(index)
         #click edit contact
         wd.find_element_by_xpath(".//*[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
         #fill out form
@@ -43,17 +47,25 @@ class ContactHelper:
             wd.find_element_by_name(fild_name).send_keys(text)
 
     def delet_first_contact(self):
+        self.delet_contact_by_index(0)
+
+    def delet_contact_by_index(self, index):
         wd = self.app.wd
-        self.select_first_contact()
+        wd.get("http://localhost/addressbook/")
+        self.select_contact_by_index(index)
         #delet element
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         #confirm deletion
         wd.switch_to_alert().accept()
         self.list_contact_cache = None
 
-    def select_first_contact(self):
+    def select_contact_by_index(self, index):
         wd = self.app.wd
-        wd.find_element_by_name("selected[]").click()
+        wd.get("http://localhost/addressbook/")
+        wd.find_elements_by_name("selected[]")[index].click()
+
+    def select_first_contact(self):
+         self.select_contact_by_index()
 
     def coutn(self):
         wd = self.app.wd
