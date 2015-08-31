@@ -23,7 +23,10 @@ class ContactHelper:
         wd = self.app.wd
         self.select_contact_by_index(index)
         #click edit contact
-        wd.find_element_by_xpath(".//*[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+        #wd.find_element_by_xpath(".//*[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+        rows = wd.find_elements_by_css_selector("tr[name='entry']")
+        row = rows[index]
+        row.find_element_by_css_selector("img[alt='Edit']").click()
         #fill out form
         self.fill_contact_form(new_contact_date)
         #submit update
