@@ -3,10 +3,10 @@ from sys import maxsize
 
 class Group:
 
-    def __init__(self, firstname=None, lastname=None, nickname=None, title=None, company=None, homephone=None, mobilephone=None,
-                workphone=None, secondaryphone=None, id=None):
-        self.firstname = firstname
+    def __init__(self, lastname=None, firstname=None,  nickname=None, title=None, company=None, homephone=None, mobilephone=None,
+                 workphone=None, secondaryphone=None, id=None, all_phones_from_home_page=None):
         self.lastname = lastname
+        self.firstname = firstname
         self.nickname = nickname
         self.title = title
         self.company = company
@@ -14,6 +14,7 @@ class Group:
         self.mobilephone = mobilephone
         self.workphone = workphone
         self.secondaryphone = secondaryphone
+        self.all_phones_from_home_page = all_phones_from_home_page
         self.id = id
 
     def __repr__(self):

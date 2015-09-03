@@ -38,15 +38,15 @@ class ContactHelper:
 
     def fill_contact_form(self, contact):
         wd = self.app.wd
-        self.change_field_value("firstname", contact.firstname)
         self.change_field_value("lastname", contact.lastname)
+        self.change_field_value("firstname", contact.firstname)
         self.change_field_value("nickname", contact.nickname)
         self.change_field_value("title", contact.title)
         self.change_field_value("company", contact.company)
         self.change_field_value("home", contact.homephone)
         self.change_field_value("mobile", contact.mobilephone)
         self.change_field_value("work", contact.workphone)
-        self.change_field_value("fax", contact.secondaryphone)
+        self.change_field_value("phone2", contact.secondaryphone)
 
     def change_field_value(self, fild_name, text):
         wd = self.app.wd
@@ -80,7 +80,6 @@ class ContactHelper:
 
     def coutn(self):
         wd = self.app.wd
-        #?????? ?? ????? ??????. ???? - wd.get("http://localhost/addressbook/")
         self.app.open_home_page()
         return len(wd.find_elements_by_name("selected[]"))
 
@@ -93,13 +92,12 @@ class ContactHelper:
             self.list_contact_cache = []
             for element in wd.find_elements_by_name("entry"):
                 cells = element.find_elements_by_tag_name("td")
-                text_firstname = cells[1].text
-                text_lastname = cells[2].text
+                text_lastname = cells[1].text
+                text_firstname = cells[2].text
                 id = element.find_element_by_name("selected[]").get_attribute("id")
-                all_phones = cells[5].text.splitlines()
+                all_phones = cells[5].text
                 self.list_contact_cache.append(Group(id=id, lastname=text_lastname, firstname=text_firstname,
-                                                     homephone=all_phones[0], mobilephone=all_phones[1],
-                                                     workphone=all_phones[2], secondaryphone=all_phones[3]))
+                                                     all_phones_from_home_page=all_phones))
         return list(self.list_contact_cache)
 
     def open_contact_to_edit_by_index(self, index):
