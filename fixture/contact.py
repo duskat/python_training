@@ -9,7 +9,6 @@ class ContactHelper:
 
     def create(self, contact):
         wd = self.app.wd
-        #?????? ?? self.app.open_home_page() - ???? wd.get("http://localhost/addressbook/")
         self.app.open_home_page()
         # init new contact creation
         wd.find_element_by_link_text("add new").click()
@@ -41,6 +40,10 @@ class ContactHelper:
         self.change_field_value("lastname", contact.lastname)
         self.change_field_value("firstname", contact.firstname)
         self.change_field_value("nickname", contact.nickname)
+        self.change_field_value("address", contact.address)
+        self.change_field_value("email", contact.email)
+        self.change_field_value("email2", contact.email2)
+        self.change_field_value("email3", contact.email3)
         self.change_field_value("title", contact.title)
         self.change_field_value("company", contact.company)
         self.change_field_value("home", contact.homephone)
@@ -60,7 +63,6 @@ class ContactHelper:
 
     def delet_contact_by_index(self, index):
         wd = self.app.wd
-        #?????? ?? ????? ??????. ???? - wd.get("http://localhost/addressbook/")
         self.app.open_home_page()
         self.select_contact_by_index(index)
         #delet element
@@ -71,7 +73,6 @@ class ContactHelper:
 
     def select_contact_by_index(self, index):
         wd = self.app.wd
-        #?????? ?? ????? ??????. ???? - wd.get("http://localhost/addressbook/")
         self.app.open_home_page()
         wd.find_elements_by_name("selected[]")[index].click()
 
@@ -95,8 +96,10 @@ class ContactHelper:
                 text_lastname = cells[1].text
                 text_firstname = cells[2].text
                 id = element.find_element_by_name("selected[]").get_attribute("id")
+                address = cells[3].text
+                email = cells[4].text
                 all_phones = cells[5].text
-                self.list_contact_cache.append(Group(id=id, lastname=text_lastname, firstname=text_firstname,
+                self.list_contact_cache.append(Group(id=id, lastname=text_lastname, firstname=text_firstname, address=address, email=email,
                                                      all_phones_from_home_page=all_phones))
         return list(self.list_contact_cache)
 
@@ -120,13 +123,18 @@ class ContactHelper:
         firstname = wd.find_element_by_name("firstname").get_attribute("value")
         lastname = wd.find_element_by_name("lastname").get_attribute("value")
         id = wd.find_element_by_name("id").get_attribute("value")
+        address = wd.find_element_by_name("address").get_attribute("value")
+        email = wd.find_element_by_name("email").get_attribute("value")
+        email2 = wd.find_element_by_name("email2").get_attribute("value")
+        email3 = wd.find_element_by_name("email3").get_attribute("value")
         homephone = wd.find_element_by_name("home").get_attribute("value")
         mobilephone = wd.find_element_by_name("mobile").get_attribute("value")
         workphone = wd.find_element_by_name("work").get_attribute("value")
         secondaryphone = wd.find_element_by_name("phone2").get_attribute("value")
-        return Group(firstname=firstname, lastname=lastname, id=id,
-                       homephone=homephone, mobilephone=mobilephone,
-                       workphone=workphone, secondaryphone=secondaryphone)
+        return Group(firstname=firstname, lastname=lastname, id=id, address=address,
+                     email=email, email2=email2,  email3=email3,
+                     homephone=homephone, mobilephone=mobilephone,
+                     workphone=workphone, secondaryphone=secondaryphone)
 
     def get_contact_from_view_page(self, index):
         wd = self.app.wd

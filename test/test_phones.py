@@ -1,9 +1,17 @@
 import re
+from random import randrange
 
-def test_phones_on_home_page(app):
-    contact_from_home_page = app.contact.get_contact_list()[0]
-    contact_from_edit_page = app.contact.get_contact_info_from_edit_page(0)
+def test_info_on_home_page(app):
+    list_contact = app.contact.get_contact_list()
+    index = randrange(len(list_contact))
+    contact_from_home_page = app.contact.get_contact_list()[index]
+    contact_from_edit_page = app.contact.get_contact_info_from_edit_page(index)
     assert contact_from_home_page.all_phones_from_home_page == merge_phones_like_on_home_page(contact_from_edit_page)
+    assert contact_from_home_page.email == merge_email_like_on_home_page(contact_from_edit_page)
+    assert contact_from_home_page.firstname == contact_from_edit_page.firstname
+    assert contact_from_home_page.lastname == contact_from_edit_page.lastname
+    assert contact_from_home_page.address == contact_from_edit_page.address
+
 
 def test_phones_on_contact_view_page(app):
     contact_from_view_page = app.contact.get_contact_from_view_page(0)
@@ -21,3 +29,8 @@ def merge_phones_like_on_home_page(contact):
                             (map(lambda x: clear(x),
                                  filter(lambda x: x is not None,
                                         [contact.homephone, contact.mobilephone, contact.workphone, contact.secondaryphone])))))
+
+def merge_email_like_on_home_page(email):
+    return "\n".join(filter(lambda x: x!="",
+                     filter(lambda x: x is not None,
+                            [email.email, email.email2, email.email3])))

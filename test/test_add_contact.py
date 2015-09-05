@@ -4,7 +4,8 @@ from model.contact import Group
 
 def test_add_contact(app):
     old_contacts = app.contact.get_contact_list()
-    group = Group(lastname="Doe", firstname="John", nickname="Vanya", title="tester", company="Yandex",
+    group = Group(lastname="Doe", firstname="John", nickname="Vanya", title="tester", company="Yandex", address="489 Wateer Oal, NY",
+                  email="Doe.John@yandex.ru", email2="Doe.John@google.ru", email3="Doe.John@google.com",
                   homephone="+1768387593", mobilephone="(707)5783737", workphone="(898)879-7865",
                   secondaryphone="7086787609")
     app.contact.create(group)

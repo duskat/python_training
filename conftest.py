@@ -19,7 +19,7 @@ def app(request):
     fixture.session.ensure_login(username="admin", password="secret")
     return fixture
 
-    
+
 @pytest.fixture (scope = "session", autouse=True)
 def stop(request):
     def fin():
