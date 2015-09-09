@@ -5,7 +5,7 @@ import random
 import string
 
 def random_data_symbols(prefix, maxlen):
-    symbols = string.ascii_letters  + string.digits + ""*5
+    symbols = string.ascii_letters  + string.digits + " "*5
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 def random_data_digits(prefix, maxlen):
