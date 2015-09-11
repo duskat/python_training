@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 from model.contact import Group
-import pytest
-from data.add_contact import costant as testdata
 
 
-@pytest.mark.parametrize("data", testdata, ids=[repr(i) for i in testdata])
 
-def test_add_contact(app, data):
+def test_add_contact(app, json_contacts):
+    data = json_contacts
     old_contacts = app.contact.get_contact_list()
     app.contact.create(data)
     assert len(old_contacts) + 1 == app.contact.coutn()

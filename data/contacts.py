@@ -2,7 +2,7 @@
 from model.contact import Group
 
 
-costant = [
+testdata = [
     Group(lastname="Doe", firstname="John", nickname="Vanya", title="tester", company="Yandex", address="489 Wateer Oal, NY",
                   email="Doe.John@yandex.ru", email2="Doe.John@google.ru", email3="Doe.John@google.com",
                   homephone="+1768387593", mobilephone="(707)5783737", workphone="(898)879-7865",
