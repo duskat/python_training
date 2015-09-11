@@ -7,20 +7,20 @@ import jsonpickle
 import getopt
 import sys
 
-try:
+"""try:
     opts, args = getopt.getopt(sys.argv[1:], "n:f:", ["number of groups", "file"])
 except getopt.GetoptError as err:
     getopt.usage()
-    sys.exit(2)
+    sys.exit(2)"""
 
 n = 5
 f = "data/groups.json"
 
-for o, a in opts:
+"""for o, a in opts:
     if o == "-n":
         n = int(a)
     elif o == "-f":
-        f = a
+        f = a"""
 
 
 def rendom_string(prefix, maxlen):
