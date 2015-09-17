@@ -1,7 +1,7 @@
 __author__ = 'Dzmitry'
 from sys import maxsize
 
-class Group:
+class Contact:
 
     def __init__(self, lastname=None, firstname=None,  nickname=None, title=None, company=None, address=None,
                  email=None, email2=None, email3=None,

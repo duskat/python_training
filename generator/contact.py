@@ -1,5 +1,5 @@
 __author__ = 'Dzmitry'
-from model.contact import Group
+from model.contact import Contact
 import random
 import string
 import os.path
@@ -16,9 +16,9 @@ def random_data_digits(prefix, maxlen):
 
 
 testdata = [
-    Group(firstname="", lastname="", nickname="", title="", company="")
+    Contact(firstname="", lastname="", nickname="", title="", company="")
            ] + [
-    Group(firstname=random_data_symbols("firstname", 20), lastname=random_data_symbols("lastname", 20),
+    Contact(firstname=random_data_symbols("firstname", 20), lastname=random_data_symbols("lastname", 20),
           nickname=random_data_symbols("nickname", 10), company=random_data_symbols("company", 20),
           address=random_data_symbols("address", 50), homephone=random_data_digits("homephone", 12))
         for i in range(5)

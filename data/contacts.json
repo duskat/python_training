@@ -1,6 +1,6 @@
 [
   {
-    "py/object": "model.contact.Group",
+    "py/object": "model.contact.Contact",
     "address": null,
     "title": "",
     "workphone": null,
@@ -18,7 +18,7 @@
     "homephone": null
   },
   {
-    "py/object": "model.contact.Group",
+    "py/object": "model.contact.Contact",
     "address": "addressfI KkpFWyrN11nhAM kVsKqAgguzD7bp  axjfvmYF OGAC",
     "title": null,
     "workphone": null,
@@ -36,7 +36,7 @@
     "homephone": "homephone524306651"
   },
   {
-    "py/object": "model.contact.Group",
+    "py/object": "model.contact.Contact",
     "address": "address3qJcstGjcouRSK U Yj  184FpN 7TyfYna7i5OGivyN",
     "title": null,
     "workphone": null,
@@ -54,7 +54,7 @@
     "homephone": "homephone3568311"
   },
   {
-    "py/object": "model.contact.Group",
+    "py/object": "model.contact.Contact",
     "address": "addressGJLBkWthNq2Su",
     "title": null,
     "workphone": null,
@@ -72,7 +72,7 @@
     "homephone": "homephone14546566"
   },
   {
-    "py/object": "model.contact.Group",
+    "py/object": "model.contact.Contact",
     "address": "addressLVAB4RnOwJir 4AwOb r hbhvA93 gki1W pG af",
     "title": null,
     "workphone": null,
@@ -90,7 +90,7 @@
     "homephone": "homephone71"
   },
   {
-    "py/object": "model.contact.Group",
+    "py/object": "model.contact.Contact",
     "address": "address3yc 12iGgEgpwtbsM43NtzQN MG04MQ6K0",
     "title": null,
     "workphone": null,

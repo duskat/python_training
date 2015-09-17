@@ -1,5 +1,5 @@
 __author__ = 'Dzmitry'
-from model.contact import Group
+from model.contact import Contact
 import re
 
 class ContactHelper:
@@ -99,7 +99,7 @@ class ContactHelper:
                 address = cells[3].text
                 email = cells[4].text
                 all_phones = cells[5].text
-                self.list_contact_cache.append(Group(id=id, lastname=text_lastname, firstname=text_firstname, address=address, email=email,
+                self.list_contact_cache.append(Contact(id=id, lastname=text_lastname, firstname=text_firstname, address=address, email=email,
                                                      all_phones_from_home_page=all_phones))
         return list(self.list_contact_cache)
 
@@ -131,7 +131,7 @@ class ContactHelper:
         mobilephone = wd.find_element_by_name("mobile").get_attribute("value")
         workphone = wd.find_element_by_name("work").get_attribute("value")
         secondaryphone = wd.find_element_by_name("phone2").get_attribute("value")
-        return Group(firstname=firstname, lastname=lastname, id=id, address=address,
+        return Contact(firstname=firstname, lastname=lastname, id=id, address=address,
                      email=email, email2=email2,  email3=email3,
                      homephone=homephone, mobilephone=mobilephone,
                      workphone=workphone, secondaryphone=secondaryphone)
@@ -144,5 +144,5 @@ class ContactHelper:
         mobilephone = re.search("M: (.*)", text).group(1)
         workphone = re.search("W: (.*)", text).group(1)
         secondaryphone = re.search("P: (.*)", text).group(1)
-        return Group(homephone=homephone, mobilephone=mobilephone,
+        return Contact(homephone=homephone, mobilephone=mobilephone,
                      workphone=workphone, secondaryphone=secondaryphone)
