@@ -141,6 +141,8 @@ class ContactHelper:
         self.open_contact_viewt_by_index(index)
         text = wd.find_element_by_id("content").text
         homephone = re.search("H: (.*)", text).group(1)
+        #if homephone is not None:
+            #homephone = re.search("H: (.*)", text).group(1)
         mobilephone = re.search("M: (.*)", text).group(1)
         workphone = re.search("W: (.*)", text).group(1)
         secondaryphone = re.search("P: (.*)", text).group(1)
