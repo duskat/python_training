@@ -13,6 +13,8 @@ def test_modify_group_name(app, db, check_ui):
     new_groups = db.get_group_list()
     assert len(odl_groups) == len(new_groups)
     odl_groups[index] = new_data
+    assert sorted(odl_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
     if check_ui:
-        assert sorted(odl_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
+        list_group_after_mod = app.group.get_group_list()
+        assert sorted(list_group_after_mod, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
 
