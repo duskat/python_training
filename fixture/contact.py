@@ -32,6 +32,23 @@ class ContactHelper:
         self.fill_contact_form(new_contact_date)
         #submit update
         wd.find_element_by_xpath(".//*[@id='content']/form[1]/input[1]").click()
+        wd.find_element_by_link_text("home")
+        wd.get("http://localhost/addressbook/")
+        self.list_contact_cache = None
+
+    def modify_contact_by_id(self, id, new_contact_date, index):
+        wd = self.app.wd
+        self.select_contact_by_id(id)
+        #click edit contact
+        #wd.find_element_by_xpath(".//*[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+        rows = wd.find_elements_by_css_selector("tr[name='entry']")
+        row = rows[index]
+        row.find_element_by_css_selector("img[alt='Edit']").click()
+        #fill out form
+        self.fill_contact_form(new_contact_date)
+        #submit update
+        wd.find_element_by_xpath(".//*[@id='content']/form[1]/input[1]").click()
+        wd.find_element_by_link_text("home")
         wd.get("http://localhost/addressbook/")
         self.list_contact_cache = None
 
@@ -79,6 +96,7 @@ class ContactHelper:
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         #confirm deletion
         wd.switch_to_alert().accept()
+        wd.find_element_by_link_text("home")
         self.list_contact_cache = None
 
     def select_contact_by_index(self, index):
