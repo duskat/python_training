@@ -99,6 +99,20 @@ class ContactHelper:
         wd.find_element_by_link_text("home")
         self.list_contact_cache = None
 
+    def select_contact_to_add_to_group(self, id):
+        wd = self.app.wd
+        self.app.open_home_page()
+        self.select_contact_by_id(id)
+        #select group to add contact
+        self.select_group_to_add_contact(id)
+        wd.find_element_by_css_selector("input[value='Add to']").click()
+
+    def select_group_to_add_contact(self, id):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element_by_xpath("//div[@class='right']/select//option['%s']" % id).click()
+
+
     def select_contact_by_index(self, index):
         wd = self.app.wd
         self.app.open_home_page()
